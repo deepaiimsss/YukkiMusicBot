@@ -1,3 +1,4 @@
+
 #
 # Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/TeamYukki >.
 #
@@ -27,40 +28,35 @@ selections = [
     "▃▅▂▅▃▇▄▅▃",
 ]
 
-def time_to_sec(time: str):
-    x = time.split(":")
-
-    if len(x) == 2:
-        min = int(x[0])
-        sec = int(x[1])
-
-        total_sec = (min*60) + sec
-    elif len(x) == 3:
-        hour = int(x[0])
-        min = int(x[1])
-        sec = int(x[2])
-
-        total_sec = (hour*60*60) + (min*60) + sec
-
-    return total_sec
 
 ## After Edits with Timer Bar
 
 
 def stream_markup_timer(_, videoid, chat_id, played, dur):
-    played_sec = time_to_sec(played)
-    total_sec = time_to_sec(dur)
-
-    x, y = str(round(played_sec/total_sec,1)).split(".")
-    pos = int(y)
-
-    line = "▱"
-    circle = "▰"
-
-    bar = line*(pos-1)
-    bar += circle
-    bar += line*(10-len(bar))
-   
+    played_sec = time_to_seconds(played)
+    duration_sec = time_to_seconds(dur)
+    percentage = (played_sec / duration_sec) * 100
+    sakshi = math.floor(percentage)
+    if 0 < sakshi <= 10:
+        bar = "◉—————————"
+    elif 10 < sakshi < 20:
+        bar = "—◉————————"
+    elif 20 <= sakshi < 30:
+        bar = "——◉———————"
+    elif 30 <= sakshi < 40:
+        bar = "———◉——————"
+    elif 40 <= sakshi < 50:
+        bar = "————◉—————"
+    elif 50 <= anon < 60:
+        bar = "—————◉————"
+    elif 60 <= sakshi < 70:
+        bar = "——————◉———"
+    elif 70 <= sakshi < 80:
+        bar = "———————◉——"
+    elif 80 <= sakshi < 95:
+        bar = "————————◉—"
+    else:
+        bar = "—————————◉"
     buttons = [
         [
             InlineKeyboardButton(
@@ -88,19 +84,30 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
 
 
 def telegram_markup_timer(_, chat_id, played, dur):
-    played_sec = time_to_sec(played)
-    total_sec = time_to_sec(dur)
-
-    x, y = str(round(played_sec/total_sec,1)).split(".")
-    pos = int(y)
-
-    line = "▱"
-    circle = "▰"
-
-    bar = line*(pos-1)
-    bar += circle
-    bar += line*(10-len(bar))
-    
+    played_sec = time_to_seconds(played)
+    duration_sec = time_to_seconds(dur)
+    percentage = (played_sec / duration_sec) * 100
+    sakshi = math.floor(percentage)
+    if 0 < sakshi <= 10:
+        bar = "◉—————————"
+    elif 10 < sakshi < 20:
+        bar = "—◉————————"
+    elif 20 <= sakshi < 30:
+        bar = "——◉———————"
+    elif 30 <= sakshi < 40:
+        bar = "———◉——————"
+    elif 40 <= sakshi < 50:
+        bar = "————◉—————"
+    elif 50 <= sakshi < 60:
+        bar = "—————◉————"
+    elif 60 <= sakshi < 70:
+        bar = "——————◉———"
+    elif 70 <= sakshi < 80:
+        bar = "———————◉——"
+    elif 80 <= sakshi < 95:
+        bar = "————————◉—"
+    else:
+        bar = "—————————◉"
     buttons = [
         [
             InlineKeyboardButton(
@@ -378,3 +385,5 @@ def panel_markup_3(_, videoid, chat_id):
         ],
     ]
     return buttons
+                
+                
