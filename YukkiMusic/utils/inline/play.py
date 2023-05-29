@@ -7,7 +7,7 @@
 #
 # All rights reserved.
 
-import random
+import math
 
 from pyrogram.types import InlineKeyboardButton
 
